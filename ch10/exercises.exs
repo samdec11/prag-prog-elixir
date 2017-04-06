@@ -69,4 +69,14 @@ defmodule MyList do
   #     tail
   #   end
   # end
+
+  # ListsAndRecursion-7
+  # In the last exercise of Chapter 7 on page 65, you wrote a `span` function. Use it and list
+  # comprehensions to return a list of prime numbers from 2 to n.
+  def span(from, to) when from > to, do: []
+  def span(from, to), do: [from | span(from + 1, to)]
+
+  def span_primes(num) do
+    for x <- span(2, num), x == 2 || rem(x, 2) > 0 && rem(x, 3) > 0, do: x
+  end
 end
