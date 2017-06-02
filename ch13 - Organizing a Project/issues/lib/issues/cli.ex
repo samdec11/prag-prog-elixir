@@ -9,6 +9,12 @@ defmodule Issues.CLI do
   """
   import Issues.TableFormatter, only: [ print_table_for_columns: 2 ]
 
+  def main(argv) do
+    argv
+    |> parse_args
+    |> process
+  end
+
   def run(argv) do
     argv
     |> parse_args
@@ -55,7 +61,7 @@ defmodule Issues.CLI do
 
   def decode_response({:ok, body}), do: body
   def decode_response({:error, error}) do
-    {_, message} = List.keyfind(error, "meesage", 0)
+    {_, message} = List.keyfind(error, "message", 0)
     IO.puts "Error fetching from Github: #{message}"
     System.halt(2)
   end
